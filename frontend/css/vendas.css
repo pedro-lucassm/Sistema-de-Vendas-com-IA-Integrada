@@ -1,0 +1,9 @@
+html, body {
+    height: 100%;
+}
+
+
+.table-container {
+    max-height: 630px;
+    overflow-y: auto;
+}

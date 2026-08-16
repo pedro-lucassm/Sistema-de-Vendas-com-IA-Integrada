@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/vendas.css">
+    <title>Relatórios</title>
+</head>
+
+<body class="d-flex alingn-itens-center py-4 bg-body-secondary">
+    <main class="w-100">
+        <h1 class="text-center py-5 fw-bold">PAINEL DE VENDAS</h1>
+
+        <div class="w-75 mx-auto">
+
+            <div class="d-flex justify-content-between alingn-itens-center mb-3">
+
+                <button type="button" class="btn btn-success" onclick="window.location.href=''">&#x1F6CD
+                    CADASTRAR VENDA</button>
+
+                <div class="input-group w-50">
+                    <input type="text" class="form-control" placeholder="Pesquisar produto...">
+                    <button class="btn btn-secondary" type="button">🔍 PESQUISAR</button>
+                </div>
+
+            </div>
+
+
+            <div class="table-container table-responsive">
+                <table class="table table-dark table-striped table-hover table-bordered" id="table"></table>
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+
+
+
+
+    <script src="../js/vendas.js"></script>
+</body>
+
+</html>
