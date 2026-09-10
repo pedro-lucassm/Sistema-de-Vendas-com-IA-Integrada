@@ -45,7 +45,6 @@ A tabela principal de vendas (`vendas`) no PostgreSQL foi modelada com a seguint
 ---
 
 ## 👨‍💻 Desenvolvedor
-Desenvolvido por Pedro Magalhães
+Desenvolvido por Pedro Magalhães.
 
-Projeto focado em consolidação de conhecimentos em Engenharia de Dados e Backend Python.
-* O projeto ainda está em desenvolvimento
+Projeto focado em consolidação de conhecimentos em Engenharia de Dados e API em Python.
