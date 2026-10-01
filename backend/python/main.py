@@ -7,6 +7,7 @@ from typing import Optional
 #Puxando funçoes
 from vendas import criar_venda,listar_vendas, atualizar_venda, excluir_venda
 from clientes import criar_cliente
+from produtos import criar_produto
 
 app = FastAPI() # Inicia o servidor
 
@@ -32,6 +33,13 @@ class ClienteCreateSchema(BaseModel):
     cidade: Optional[str] = None
     estado: Optional[str] = None
 
+class ProdutoCreateSchema(BaseModel):
+    nome_produto: str
+    categoria: str
+    preco_custo: float
+    preco_venda: float
+    estoque: int
+
 # Rotas
 @app.get("/vendas")
 def get_vendas():
@@ -50,5 +58,16 @@ def post_cliente(dados: ClienteCreateSchema):
         numero=dados.numero,
         cidade=dados.cidade,
         estado=dados.estado
+    )
+    return {"mensagem": "Cliente cadastrado com sucesso!"}
+
+@app.post("/cadastro_produtos")
+def post_produto(dados: ProdutoCreateSchema):
+    criar_produto(
+        nome_produto=dados.nome_produto,
+        categoria=dados.categoria,
+        preco_custo=dados.preco_custo,
+        preco_venda=dados.preco_venda,
+        estoque=dados.estoque
     )
     return {"mensagem": "Cliente cadastrado com sucesso!"}
