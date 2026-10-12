@@ -15,3 +15,15 @@ def criar_cliente(nome_cliente, tipo_doc, cpf_cnpj, telefone, email, cep, rua, n
 
     cursor.close()
     conexao.close()
+
+def listar_clientes():
+    conexao = conectar()
+    cursor = conexao.cursor() 
+
+    cursor.execute('SELECT * FROM clientes ORDER BY id_cliente')
+    resultado = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+
+    return resultado

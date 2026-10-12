@@ -10,29 +10,22 @@ async function carregarVendas() {
         let tabela = `
                 <thead class="table-light">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">ID VENDA</th>
                         <th scope="col">CLIENTE</th>
-                        <th scope="col">MODELO MOTO</th>
-                        <th scope="col">PLACA</th>
-                        <th scope="col">SERVIÇO/PRODUTO</th>
-                        <th scope="col">VALOR</th>
-                        <th scope="col" class="w-25">EDITAR / EXCLUIR</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col" class="w-25">EXCLUIR</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
         `
-
         //Dados da tabela
         vendas.forEach(venda => {
                 tabela += `
                             <tr>
-                                <th>${venda['id_venda']}</th>
-                                <td>${venda['cliente']}</td>
-                                <td>${venda['moto_modelo']}</td>
-                                <td>${venda['moto_placa']}</td>
-                                <td>${venda['servico_produto']}</td>
-                                <td>R$ ${venda['valor'].toFixed(2)}</td>
-                                <td class="d-flex justify-content-center gap-3"><button type="button" class="btn btn-warning w-25 py-2 mb-2" onclick="window.location.href=''">&#9999</button> <button type="button" class="btn btn-danger w-25 py-2 mb-2" onclick="window.location.href=''">&#128465</button></td>
+                                <td>${venda['id_venda']}</td>
+                                <td>${venda['nome_cliente']}</td>
+                                <td>R$ ${venda['valor_total']}</td>
+                                <td class="d-flex justify-content-center gap-3"><button type="button" class="btn btn-danger w-25 py-2 mb-2" onclick="window.location.href=''">&#128465</button></td>
                             </tr>
 
                 `;
@@ -44,6 +37,6 @@ async function carregarVendas() {
     } catch(erro){
         console.error('Erro ao buscar as vendas', erro)
     }
-}
+};
 
 carregarVendas();

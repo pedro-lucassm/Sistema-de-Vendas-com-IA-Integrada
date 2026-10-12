@@ -1,15 +1,16 @@
 # Puxando a biblioteca do FASTAPI e a regra de cors
+from datetime import datetime
+from typing import Optional, List
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware # Ferramenta do FastAPI que permite o front fazer requisições para o back
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional
 
 #Puxando funçoes
 from vendas import criar_venda,listar_vendas, atualizar_venda, excluir_venda
-from clientes import criar_cliente
-from produtos import criar_produto
+from clientes import criar_cliente, listar_clientes
+from produtos import criar_produto, listar_produtos
 
-app = FastAPI() # Inicia o servidor
+app = FastAPI()
 
 # Configuração que autoriza o JavaScript a conversar com o Python
 app.add_middleware(
@@ -40,10 +41,32 @@ class ProdutoCreateSchema(BaseModel):
     preco_venda: float
     estoque: int
 
+class ItemVendaCreateSchema(BaseModel):
+    id_produto: int
+    quantidade: int
+    preco_unitario: float
+    subtotal: float
+
+class VendaCreateSchema(BaseModel):
+    id_cliente: int
+    data_venda: datetime
+    valor_total: float
+    itens: List[ItemVendaCreateSchema]
+
+VendaCreateSchema.model_rebuild()
+
 # Rotas
 @app.get("/vendas")
 def get_vendas():
     return listar_vendas()
+
+@app.get("/clientes")
+def get_clientes():
+    return listar_clientes()
+
+@app.get("/produtos")
+def get_produtos():
+    return listar_produtos()
 
 @app.post("/cadastro_clientes")
 def post_cliente(dados: ClienteCreateSchema):
@@ -71,3 +94,8 @@ def post_produto(dados: ProdutoCreateSchema):
         estoque=dados.estoque
     )
     return {"mensagem": "Cliente cadastrado com sucesso!"}
+
+@app.post("/cadastro_vendas")
+def post_venda(dados: VendaCreateSchema):
+    criar_venda(dados)
+    return {"mensagem": "Venda cadastrada com sucesso!"}

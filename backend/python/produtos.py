@@ -16,3 +16,15 @@ def criar_produto(nome_produto, categoria, preco_custo, preco_venda, estoque):
 
     cursor.close()
     conexao.close()
+
+def listar_produtos():
+    conexao = conectar()
+    cursor = conexao.cursor() 
+
+    cursor.execute('SELECT * FROM produtos')
+    resultado = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+
+    return resultado
