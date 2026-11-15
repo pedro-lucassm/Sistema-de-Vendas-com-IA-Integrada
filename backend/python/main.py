@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from vendas import criar_venda,listar_vendas, atualizar_venda, excluir_venda
 from clientes import criar_cliente, listar_clientes
 from produtos import criar_produto, listar_produtos
+from main_AI import resposta_ia
 
 app = FastAPI()
 
@@ -55,6 +56,9 @@ class VendaCreateSchema(BaseModel):
 
 VendaCreateSchema.model_rebuild()
 
+class PerguntaRequest(BaseModel):
+    pergunta: str
+
 # Rotas
 @app.get("/vendas")
 def get_vendas():
@@ -99,3 +103,8 @@ def post_produto(dados: ProdutoCreateSchema):
 def post_venda(dados: VendaCreateSchema):
     criar_venda(dados)
     return {"mensagem": "Venda cadastrada com sucesso!"}
+
+@app.post("/perguntar")
+def consultar_ia(dados: PerguntaRequest):
+    resposta = resposta_ia(dados.pergunta)
+    return {"resposta": resposta}
