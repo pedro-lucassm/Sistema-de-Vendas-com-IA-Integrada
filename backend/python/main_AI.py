@@ -36,7 +36,7 @@ def resposta_ia(pergunta_usuario: str) -> str:
     """
     
     response = ollama.chat(
-        model='qwen2.5:3b',
+        model='gemma4:e4b',
         messages=[{'role': 'user', 'content': prompt}],
         options={'temperature': 0.2}
     )
