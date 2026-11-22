@@ -60,6 +60,8 @@ class PerguntaRequest(BaseModel):
     pergunta: str
 
 # Rotas
+
+# Get
 @app.get("/vendas")
 def get_vendas():
     return listar_vendas()
@@ -72,6 +74,7 @@ def get_clientes():
 def get_produtos():
     return listar_produtos()
 
+# Post
 @app.post("/cadastro_clientes")
 def post_cliente(dados: ClienteCreateSchema):
     criar_cliente(
@@ -108,3 +111,8 @@ def post_venda(dados: VendaCreateSchema):
 def consultar_ia(dados: PerguntaRequest):
     resposta = resposta_ia(dados.pergunta)
     return {"resposta": resposta}
+
+# Delete
+@app.delete("/vendas/{id_venda}")
+def deletar_venda(id_venda: int):
+    return excluir_venda(id_venda)
