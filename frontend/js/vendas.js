@@ -70,7 +70,7 @@ document.getElementById('btn-pesquisar').addEventListener('click', filtrarVendas
 async function excluirVenda(idVenda) {
     const confirmou = confirm(`Tem certeza que deseja excluir a venda #${idVenda}? Essa ação não pode ser desfeita.`);
     
-    if (!confirmou) return; // Se clicar em "Cancelar", não faz nada
+    if (!confirmou) return; 
 
     try {
         const resposta = await fetch(`http://127.0.0.1:8000/vendas/${idVenda}`, {
@@ -78,10 +78,9 @@ async function excluirVenda(idVenda) {
         });
 
         if (resposta.ok) {
-            // Remove a venda da lista em memória e atualiza a tabela na hora
+
             todasVendas = todasVendas.filter(venda => venda['id_venda'] !== idVenda);
-            filtrarVendas(); // Mantém o filtro atual caso haja algo digitado na busca
-        } else {
+            filtrarVendas();
             alert('Não foi possível excluir a venda. Verifique no servidor.');
         }
     } catch (erro) {

@@ -18,12 +18,27 @@ def criar_cliente(nome_cliente, tipo_doc, cpf_cnpj, telefone, email, cep, rua, n
 
 def listar_clientes():
     conexao = conectar()
-    cursor = conexao.cursor() 
+    cursor = conexao.cursor()
 
-    cursor.execute('SELECT * FROM clientes ORDER BY id_cliente')
+    cursor.execute("SELECT * FROM clientes WHERE status = 'Ativo' ORDER BY id_cliente")
     resultado = cursor.fetchall()
 
     cursor.close()
     conexao.close()
 
     return resultado
+
+def excluir_cliente(id_cliente):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    sql = """
+        UPDATE clientes
+        SET status = 'Desativado'
+        WHERE id_cliente = %s
+    """
+    cursor.execute(sql, (id_cliente,))
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()

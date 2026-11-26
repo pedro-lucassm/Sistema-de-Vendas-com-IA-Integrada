@@ -7,8 +7,8 @@ from pydantic import BaseModel
 
 #Puxando funçoes
 from vendas import criar_venda,listar_vendas, atualizar_venda, excluir_venda
-from clientes import criar_cliente, listar_clientes
-from produtos import criar_produto, listar_produtos
+from clientes import criar_cliente, listar_clientes, excluir_cliente
+from produtos import criar_produto, listar_produtos, excluir_produto
 from main_AI import resposta_ia
 
 app = FastAPI()
@@ -116,3 +116,11 @@ def consultar_ia(dados: PerguntaRequest):
 @app.delete("/vendas/{id_venda}")
 def deletar_venda(id_venda: int):
     return excluir_venda(id_venda)
+
+@app.delete("/clientes/{id_cliente}")
+def deletar_cliente(id_cliente: int):
+    return excluir_cliente(id_cliente)
+
+@app.delete("/produtos/{id_produto}")
+def deletar_produto(id_produto: int):
+    return excluir_produto(id_produto)

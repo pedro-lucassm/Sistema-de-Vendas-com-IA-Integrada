@@ -385,5 +385,4 @@ def resposta_ia(pergunta_usuario: str) -> str:
 
         return final_response.message.content
 
-    # Se não precisou de ferramenta
     return response.message.content

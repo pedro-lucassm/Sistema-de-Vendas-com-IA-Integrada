@@ -19,12 +19,28 @@ def criar_produto(nome_produto, categoria, preco_custo, preco_venda, estoque):
 
 def listar_produtos():
     conexao = conectar()
-    cursor = conexao.cursor() 
+    cursor = conexao.cursor()
 
-    cursor.execute('SELECT * FROM produtos')
+    cursor.execute("SELECT * FROM produtos WHERE status = 'Ativo'")
     resultado = cursor.fetchall()
 
     cursor.close()
     conexao.close()
 
     return resultado
+
+
+def excluir_produto(id_produto):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    sql = """
+        UPDATE produtos
+        SET status = 'Desativado'
+        WHERE id_produto = %s
+    """
+    cursor.execute(sql, (id_produto,))
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
